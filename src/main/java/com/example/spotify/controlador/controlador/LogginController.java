@@ -1,8 +1,6 @@
 package com.example.spotify.controlador.controlador;
 
-import com.example.spotify.controlador.controlador.AppMainController;
 import com.example.spotify.controlador.modelo.Alerta;
-import com.example.spotify.controlador.modelo.Conexion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

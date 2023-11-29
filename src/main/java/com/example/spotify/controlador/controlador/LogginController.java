@@ -1,6 +1,7 @@
 package com.example.spotify.controlador.controlador;
 
 import com.example.spotify.controlador.modelo.Alerta;
+import com.example.spotify.controlador.modelo.Conexion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -19,18 +20,19 @@ public class LogginController {
 
     @FXML
     public void iniciarSesion(ActionEvent actionEvent) {
-        /*Conexion conexion = new Conexion();
+        Conexion conexion = new Conexion();
         if (conexion.tryConnect()) {
             Alerta.showAlert("Exito", "Se inició sesión correctamente.", Alert.AlertType.INFORMATION);
             cerrarVentana();
             appMainController.ventana();
         } else {
             Alerta.showAlert("Error", "No se pudo iniciar sesión.", Alert.AlertType.INFORMATION);
-        }*/
-
+        }
+        /*
         Alerta.showAlert("Exito", "Se inició sesión correctamente.", Alert.AlertType.INFORMATION);
         cerrarVentana();
         appMainController.ventana();
+        */
     }
 
     public void registrarse(ActionEvent actionEvent){

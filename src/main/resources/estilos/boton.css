@@ -1,0 +1,25 @@
+#titulo {
+    -fx-font-family: "Verdana";
+    -fx-font-size: 12px;
+    -fx-text-fill: black;
+}
+
+#fondo {
+    -fx-background-color: black;
+}
+
+Button {
+     -fx-background-color: lightgreen;
+     -fx-border-color: white;
+     -fx-border-width: 2;
+     -fx-text-fill: black;
+     -fx-font-family: "Verdana";
+     -fx-font-size: 12px;
+     -fx-background-radius: 12 12 12 12;
+     -fx-border-radius: 10 10 10 10;
+}
+
+Button:hover {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}

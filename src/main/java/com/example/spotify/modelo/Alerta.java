@@ -1,4 +1,4 @@
-package com.example.spotify.controlador.modelo;
+package com.example.spotify.modelo;
 
 import javafx.scene.control.Alert;
 

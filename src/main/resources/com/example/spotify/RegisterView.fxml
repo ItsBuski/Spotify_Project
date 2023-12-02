@@ -3,52 +3,68 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify.controlador.RegisterController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="200.0" layoutY="125.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="500.0" fitWidth="600.0" layoutX="200.0" layoutY="125.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../../../imagenes/background4.png" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER" layoutX="150.0" layoutY="46.0" prefHeight="300.0" prefWidth="300.0" spacing="25.0">
+      <VBox alignment="CENTER" layoutX="150.0" prefHeight="500.0" prefWidth="300.0" spacing="25.0">
          <children>
             <Label text="Registro" textFill="WHITE">
                <font>
                   <Font name="Verdana Bold" size="20.0" />
                </font>
             </Label>
-            <TextField promptText="Ingrese su nombre de usuario">
+            <TextField fx:id="nombreUsuarioNuevoTxt" promptText="Ingrese su nombre de usuario">
                <font>
                   <Font name="Verdana" size="14.0" />
                </font>
             </TextField>
-            <TextField promptText="Ingrese su correo electrónico">
+            <TextField fx:id="emailUsuarioNuevoTxt" promptText="Ingrese su correo electrónico">
                <font>
                   <Font name="Verdana" size="14.0" />
                </font>
             </TextField>
-            <TextField promptText="Ingrese su contraseña">
+            <PasswordField fx:id="passUsuarioNuevoTxt" promptText="Ingrese su contraseña">
                <font>
                   <Font name="Verdana" size="14.0" />
                </font>
-            </TextField>
-            <TextField promptText="Confirme su contraseña">
+            </PasswordField>
+            <PasswordField fx:id="confirmarPassTxt" promptText="Confirme su contraseña">
                <font>
                   <Font name="Verdana" size="14.0" />
                </font>
-            </TextField>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+            </PasswordField>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#seleccionarIcono" text="Seleccionar icono">
+                     <font>
+                        <Font name="Verdana" size="12.0" />
+                     </font>
+                  </Button>
+                  <Pane prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: lightgreen; -fx-background-color: lightgray;">
+                     <children>
+                        <ImageView fx:id="iconoImageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="55.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#cancelarRegistro" stylesheets="@../../../estilos/boton.css" text="Cancelar" />
-                  <Button mnemonicParsing="false" stylesheets="@../../../estilos/boton.css" text="Confirmar registro" />
+                  <Button mnemonicParsing="false" onAction="#confirmarRegistro" stylesheets="@../../../estilos/boton.css" text="Confirmar registro" />
                </children>
             </HBox>
          </children>

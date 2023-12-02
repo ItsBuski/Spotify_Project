@@ -46,7 +46,7 @@
                                           <Image url="@../../../imagenes/alien0.png" />
                                        </image>
                                     </ImageView>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" text="Nombre" textFill="WHITE">
+                                    <Label fx:id="nombreUsuariotxt" alignment="CENTER" contentDisplay="CENTER" text="Nombre" textFill="WHITE">
                                        <font>
                                           <Font name="Verdana Bold" size="16.0" />
                                        </font></Label>
@@ -57,7 +57,7 @@
                            <items>
                               <AnchorPane maxHeight="50.0" minHeight="50.0" style="-fx-background-color: transparent;">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutY="15.0" mnemonicParsing="false" onAction="#buscarBtn" prefWidth="70.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Buscar" AnchorPane.leftAnchor="10.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutY="15.0" mnemonicParsing="false" onAction="#busqueda" prefWidth="70.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Buscar" AnchorPane.leftAnchor="10.0">
                                        <font>
                                           <Font name="Verdana" size="12.0" />
                                        </font>
@@ -193,12 +193,12 @@
                               </HBox>
                               <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="280.0" spacing="10.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Button alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#configuracionBtn" style="-fx-background-color: transparent;" text="Configuración" textFill="WHITE" underline="true">
+                                    <Button alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#configuracionCuenta" style="-fx-background-color: transparent;" text="Configuración" textFill="WHITE" underline="true">
                                        <font>
                                           <Font name="Verdana Bold" size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#cerrarSesionBtn" style="-fx-background-color: transparent;" text="Cerrar Sesión" textFill="WHITE" underline="true">
+                                    <Button alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: transparent;" text="Cerrar Sesión" textFill="WHITE" underline="true">
                                        <font>
                                           <Font name="Verdana Bold" size="14.0" />
                                        </font>

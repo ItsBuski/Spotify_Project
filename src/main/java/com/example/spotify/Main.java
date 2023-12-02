@@ -1,13 +1,13 @@
-package com.example.spotify.controlador.modelo;
+package com.example.spotify;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.scene.Scene;
 import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.application.Application;
 
 public class Main extends Application {
+
     @Override
     public void start(Stage stage){
         try {

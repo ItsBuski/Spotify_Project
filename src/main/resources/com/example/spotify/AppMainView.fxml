@@ -16,24 +16,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify.controlador.AppMainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify.controlador.controlador.AppMainController">
    <children>
       <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../../../imagenes/background1.png" />
+            <Image url="@../../../imagenes/background2.png" />
          </image>
       </ImageView>
-      <SplitPane dividerPositions="0.3544600938967136" style="-fx-background-color: transparent; -fx-border-color: lightgreen;" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.3544600938967136" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane maxWidth="600.0" minWidth="450.0" style="-fx-background-color: transparent;">
                <children>
                   <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="720.0" prefWidth="479.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="100.0" nodeOrientation="LEFT_TO_RIGHT" spacing="100.0" style="-fx-border-color: lightgray;" VBox.vgrow="ALWAYS">
+                        <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="100.0" nodeOrientation="LEFT_TO_RIGHT" spacing="100.0" style="-fx-border-color: lightgreen;" VBox.vgrow="ALWAYS">
                            <children>
                               <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../imagenes/icon.png" />
+                                    <Image url="@../../../imagenes/icono.png" />
                                  </image>
                                  <viewport>
                                     <Rectangle2D />
@@ -43,7 +43,7 @@
                                  <children>
                                     <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                                        <image>
-                                          <Image url="@../../../imagenes/alien0.png" />
+                                          <Image url="@../../../imagenes/a4e8c9b08b534e93b7f2367ae9cb11ee.png" />
                                        </image>
                                     </ImageView>
                                     <Label alignment="CENTER" contentDisplay="CENTER" text="Nombre" textFill="WHITE">
@@ -53,16 +53,16 @@
                                  </children>
                               </HBox>
                            </children></HBox>
-                        <SplitPane dividerPositions="0.2" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="300.0" style="-fx-background-color: transparent; -fx-border-color: lightgray;" VBox.vgrow="ALWAYS">
+                        <SplitPane dividerPositions="0.2" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="300.0" style="-fx-background-color: transparent; -fx-border-color: lightgreen;" VBox.vgrow="ALWAYS">
                            <items>
                               <AnchorPane maxHeight="50.0" minHeight="50.0" style="-fx-background-color: transparent;">
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutY="15.0" mnemonicParsing="false" onAction="#buscarBtn" prefWidth="70.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Buscar" AnchorPane.leftAnchor="10.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutY="15.0" mnemonicParsing="false" prefWidth="70.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Buscar" AnchorPane.leftAnchor="10.0">
                                        <font>
                                           <Font name="Verdana" size="12.0" />
                                        </font>
                                     </Button>
-                                    <TextField fx:id="buscador" layoutX="133.0" layoutY="14.0" prefHeight="25.0" prefWidth="250.0" promptText="¿Qué te apetece escuchar?" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.rightAnchor="10.0">
+                                    <TextField layoutX="133.0" layoutY="14.0" prefHeight="25.0" prefWidth="250.0" promptText="¿Qué te apetece escuchar?" style="-fx-background-color: white; -fx-background-radius: 10;" AnchorPane.rightAnchor="10.0">
                                        <font>
                                           <Font name="Verdana" size="12.0" />
                                        </font>
@@ -71,14 +71,14 @@
                               </AnchorPane>
                               <AnchorPane style="-fx-background-color: transparent;">
                                  <children>
-                                    <ScrollPane hbarPolicy="NEVER" layoutX="123.0" layoutY="10.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ScrollPane hbarPolicy="NEVER" layoutX="123.0" layoutY="10.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     <VBox layoutX="193.0" layoutY="30.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                                                    <image>
-                                                      <Image url="@../../../imagenes/alien2.png" />
+                                                      <Image url="@../../../imagenes/fd214e5eb8584bf6b47e8ff2883b6b51.png" />
                                                    </image>
                                                    <HBox.margin>
                                                       <Insets />
@@ -100,7 +100,7 @@
                                                 </VBox>
                                              </children>
                                           </HBox>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS" />
+                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: transparent;" />
                                        </children>
                                        <padding>
                                           <Insets left="5.0" right="5.0" />
@@ -113,7 +113,7 @@
                               <Insets top="25.0" />
                            </VBox.margin>
                         </SplitPane>
-                        <SplitPane dividerPositions="0.2" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="300.0" style="-fx-background-color: transparent; -fx-border-color: lightgray;" VBox.vgrow="ALWAYS">
+                        <SplitPane dividerPositions="0.2" nodeOrientation="LEFT_TO_RIGHT" orientation="VERTICAL" prefHeight="300.0" style="-fx-background-color: transparent; -fx-border-color: lightgreen;" VBox.vgrow="ALWAYS">
                            <items>
                               <AnchorPane maxHeight="50.0" minHeight="50.0" style="-fx-background-color: transparent;">
                                  <children>
@@ -122,7 +122,7 @@
                                           <Font name="Verdana" size="12.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="8.0" mnemonicParsing="false" onAction="#crearListaReproduccion" style="-fx-background-color: transparent;" text="+" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="392.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="+" textFill="WHITE" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="8.0">
                                        <font>
                                           <Font name="Verdana Bold" size="18.0" />
                                        </font>
@@ -131,14 +131,14 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="213.0" prefWidth="635.0" style="-fx-background-color: transparent;">
                                  <children>
-                                    <ScrollPane hbarPolicy="NEVER" layoutX="68.0" layoutY="-39.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <ScrollPane hbarPolicy="NEVER" layoutX="68.0" layoutY="-39.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     <VBox layoutX="183.0" layoutY="20.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                                                    <image>
-                                                      <Image url="@../../../imagenes/alien1.png" />
+                                                      <Image url="@../../../imagenes/fd214e5eb8584bf6b47e8ff2883b6b51.png" />
                                                    </image>
                                                    <HBox.margin>
                                                       <Insets />
@@ -170,117 +170,34 @@
             </AnchorPane>
             <AnchorPane style="-fx-background-color: transparent;" SplitPane.resizableWithParent="false">
                <children>
-                  <VBox layoutX="299.0" layoutY="141.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.25" layoutX="331.0" layoutY="504.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: transparent; -fx-border-color: lightgreen;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
+                    <items>
+                      <AnchorPane maxHeight="70.0" minHeight="70.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                    </items>
+                  </SplitPane>
+                  <Button alignment="CENTER" defaultButton="true" layoutX="742.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Cerrar Sesión" textFill="WHITE" underline="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <HBox alignment="CENTER_LEFT" layoutY="150.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="468.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <HBox prefHeight="250.0" prefWidth="200.0">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="525.0" spacing="20.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <ImageView fitHeight="200.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../imagenes/alien1.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label text="Nombre Lista" textFill="WHITE">
-                                       <font>
-                                          <Font name="Verdana Bold" size="36.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <padding>
-                                    <Insets left="20.0" right="20.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="280.0" spacing="10.0" HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <Button alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#configuracionBtn" style="-fx-background-color: transparent;" text="Configuración" textFill="WHITE" underline="true">
-                                       <font>
-                                          <Font name="Verdana Bold" size="14.0" />
-                                       </font>
-                                    </Button>
-                                    <Button alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#cerrarSesionBtn" style="-fx-background-color: transparent;" text="Cerrar Sesión" textFill="WHITE" underline="true">
-                                       <font>
-                                          <Font name="Verdana Bold" size="14.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </HBox>
-                           </children>
-                        </HBox>
-                        <SplitPane dividerPositions="0.2" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: transparent; -fx-border-color: lightgreen;" VBox.vgrow="ALWAYS">
-                           <items>
-                              <AnchorPane maxHeight="50.0" minHeight="50.0">
-                                 <children>
-                                    <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <Label text="Título" textFill="WHITE">
-                                             <font>
-                                                <Font name="Verdana Bold Italic" size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Álbum" textFill="WHITE">
-                                             <font>
-                                                <Font name="Verdana Bold Italic" size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Duración" textFill="WHITE">
-                                             <font>
-                                                <Font name="Verdana Bold Italic" size="16.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                                 <children>
-                                    <ScrollPane layoutX="308.0" layoutY="103.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
-                                             <children>
-                                                <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
-                                                   <image>
-                                                      <Image url="@../../../imagenes/alien2.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Label text="Nombre Canción" textFill="WHITE">
-                                                   <font>
-                                                      <Font name="Verdana Bold" size="15.0" />
-                                                   </font>
-                                                </Label>
-                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0" HBox.hgrow="ALWAYS">
-                                                   <children>
-                                                      <Label text="Nombre Álbum" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Verdana Bold" size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label text="Duración" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Verdana Bold" size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
-                                             </children></HBox>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS" />
-                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS" />
-                                       </children>
-                                       <padding>
-                                          <Insets left="5.0" right="5.0" />
-                                       </padding>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </items>
-                        </SplitPane>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../imagenes/47974ec9dc674d3d9ec2b82a04007141.png" />
+                           </image>
+                        </ImageView>
+                        <Label text="Nombre Lista" textFill="WHITE">
+                           <font>
+                              <Font name="Verdana Bold" size="40.0" />
+                           </font>
+                        </Label>
                      </children>
-                  </VBox>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </HBox>
                </children></AnchorPane>
          </items>
       </SplitPane>
@@ -290,7 +207,7 @@
                <children>
                   <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../imagenes/alien2.png" />
+                        <Image url="@../../../imagenes/21eb433ec9f44933873275eafbe431a2.png" />
                      </image>
                      <HBox.margin>
                         <Insets left="10.0" />

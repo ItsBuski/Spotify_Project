@@ -11,44 +11,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify.controlador.controlador.LogginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify.controlador.LogginController">
     <children>
         <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" smooth="false">
             <image>
-                <Image url="@../../../imagenes/fondo2.png" />
+                <Image url="@../../../imagenes/background3.png" />
             </image>
         </ImageView>
-        <VBox alignment="CENTER" layoutX="163.0" layoutY="63.0" prefHeight="275.0" prefWidth="275.0" spacing="20.0">
+        <VBox alignment="CENTER" layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0" spacing="40.0">
             <children>
                 <Label contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" text="¡Bienvenido a Spotify!" textAlignment="CENTER" textFill="WHITE">
                     <font>
-                        <Font name="Verdana Bold" size="16.0" />
+                        <Font name="Verdana Bold" size="20.0" />
                     </font>
                 </Label>
-                <TextField fx:id="nombreTxt" nodeOrientation="LEFT_TO_RIGHT" prefWidth="100.0" promptText="Nombre de Usuario">
+                <TextField fx:id="correoTxt" nodeOrientation="LEFT_TO_RIGHT" promptText="Ingrese su correo electrónico">
                     <font>
                         <Font name="Verdana" size="14.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="correoTxt" nodeOrientation="LEFT_TO_RIGHT" promptText="Correo Electrónico">
-                    <font>
-                        <Font name="Verdana" size="14.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="passTxt" nodeOrientation="LEFT_TO_RIGHT" promptText="Contraseña">
+                <TextField fx:id="passTxt" nodeOrientation="LEFT_TO_RIGHT" promptText="Ingrese su contraseña">
                     <font>
                         <Font name="Verdana" size="14.0" />
                     </font>
                 </TextField>
                 <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" spacing="30.0">
                     <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#iniciarSesion" stylesheets="@../../../estilos/boton.css" text="Iniciar Sesión">
-                     <font>
-                        <Font name="Verdana" size="12.0" />
-                     </font></Button>
                         <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#registrarse" stylesheets="@../../../estilos/boton.css" text="Registrarse">
                      <font>
-                        <Font name="Verdana" size="12.0" />
+                        <Font name="Verdana" size="14.0" />
+                     </font></Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#iniciarSesion" stylesheets="@../../../estilos/boton.css" text="Iniciar Sesión">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
                      </font></Button>
                     </children>
                 </HBox>

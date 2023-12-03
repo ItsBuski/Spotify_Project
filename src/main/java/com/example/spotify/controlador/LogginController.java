@@ -35,12 +35,12 @@ public class LogginController {
             if (correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")){
                 if (!pass.isEmpty()) {
                     Conexion conexion = new Conexion();
-                    String sentenciaSql = "SELECT email, passw FROM usuarios where email = ? and passw = ?";
                     PreparedStatement sentencia = null;
                     ResultSet resultado = null;
 
-                    if (conexion.tryConnect()) {
-                        try {
+                    try {
+                        if(conexion.tryConnect()){
+                            String sentenciaSql = "SELECT email, passw FROM usuarios where email = ? and passw = ?";
                             sentencia = conexion.connection.prepareStatement(sentenciaSql);
                             sentencia.setString(1, correo);
                             sentencia.setString(2, pass);
@@ -55,16 +55,19 @@ public class LogginController {
                             } else {
                                 Alerta.showAlert("Error", "Correo o contraseña incorrectos.", Alert.AlertType.WARNING);
                             }
-                        } catch (SQLException sqle) {
-                            sqle.printStackTrace();
-                        } finally {
-                            if (sentencia != null && resultado != null) {
-                                try {
-                                    sentencia.close();
-                                    resultado.close();
-                                } catch (SQLException sqle) {
-                                    sqle.printStackTrace();
-                                }
+                        } else {
+                            Alerta.showAlert("Error", "No se pudo conectar a la base de datos. Verifica la configuración.", Alert.AlertType.ERROR);
+                        }
+                    } catch (SQLException e) {
+                        Alerta.showAlert("Error", "No se pudo conectar a la base de datos.", Alert.AlertType.ERROR);
+                        e.printStackTrace();
+                    } finally {
+                        if (sentencia != null && resultado != null) {
+                            try {
+                                sentencia.close();
+                                resultado.close();
+                            } catch (SQLException sqle) {
+                                sqle.printStackTrace();
                             }
                         }
                     }
@@ -88,5 +91,4 @@ public class LogginController {
         Stage stage = (Stage) correoTxt.getScene().getWindow();
         stage.close();
     }
-
 }

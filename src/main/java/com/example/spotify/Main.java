@@ -15,7 +15,7 @@ public class Main extends Application {
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             scene.getStylesheets().add(getClass().getResource("/estilos/boton.css").toExternalForm());
             stage.setResizable(false);
-            stage.setTitle("Spotify!");
+            stage.setTitle("Inicio de sesión");
             stage.setScene(scene);
             stage.close();
             stage.show();

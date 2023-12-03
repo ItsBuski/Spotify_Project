@@ -9,6 +9,8 @@ import java.io.IOException;
 import javafx.scene.image.*;
 import javafx.stage.Modality;
 import javafx.fxml.FXMLLoader;
+
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import com.example.spotify.Main;
 import javafx.event.ActionEvent;
@@ -44,7 +46,7 @@ public class RegisterController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load(), 600, 500);
             Stage stage = new Stage();
             stage.setResizable(false);
-
+            stage.setTitle("Registro");
             // Establecer la modalidad antes de mostrar la ventana
             stage.initModality(Modality.APPLICATION_MODAL);
 
@@ -77,12 +79,16 @@ public class RegisterController implements Initializable {
             usuario.setPassw(passUsuarioNuevoTxt.getText().trim());
             usuario.setIconoUsuario(imageToByteArray(iconoImageView.getImage()));
 
-            // Insertar usuario en la base de datos
-            Usuario.insertarUsuario(usuario);
-
-            Alerta.showAlert("Éxito", "Registro realizado con éxito.", Alert.AlertType.CONFIRMATION);
-            cerrarVentana();
-            appMainController.ventanaPrincipal();
+            try {
+                // Insertar usuario en la base de datos
+                Usuario.insertarUsuario(usuario);
+                cerrarVentana();
+                appMainController.ventanaPrincipal();
+            } catch (Exception e) {
+                // Manejar otras excepciones de manera genérica
+                e.printStackTrace();
+                Alerta.showAlert("Error", "Se produjo un error durante el registro.", Alert.AlertType.ERROR);
+            }
         }
     }
 

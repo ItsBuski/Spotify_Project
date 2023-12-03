@@ -1,11 +1,13 @@
 package com.example.spotify.modelo;
 
+import javafx.scene.control.Alert;
+
+import java.util.List;
+import java.util.Arrays;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import java.util.List;
 
 public class Usuario {
     private String email;
@@ -66,17 +68,22 @@ public class Usuario {
     public static void insertarUsuario(Usuario usuario) {
         String sentenciaSql = "INSERT INTO usuarios (email, nombre, passw, iconoUsuario) VALUES (?, ?, ?, ?)";
         try {
-            //Inicia transacción
-            conexion.connection.setAutoCommit( false);
-            PreparedStatement sentencia = Conexion.connection.prepareStatement(sentenciaSql);
-            sentencia.setString(1, usuario.getEmail());
-            sentencia.setString(2, usuario.getNombre());
-            sentencia.setString(3, usuario.getPassw());
-            sentencia.setBytes(4, usuario.getIconoUsuario());
-            sentencia.execute();
-            sentencia.close();
-            // Valida la transacción
-            conexion.connection.commit();
+            if (conexion.tryConnect()){
+                //Inicia transacción
+                conexion.connection.setAutoCommit(false);
+                PreparedStatement sentencia = Conexion.connection.prepareStatement(sentenciaSql);
+                sentencia.setString(1, usuario.getEmail());
+                sentencia.setString(2, usuario.getNombre());
+                sentencia.setString(3, usuario.getPassw());
+                sentencia.setBytes(4, usuario.getIconoUsuario());
+                sentencia.execute();
+                sentencia.close();
+                // Valida la transacción
+                conexion.connection.commit();
+                Alerta.showAlert("Éxito", "Registro realizado con éxito.", Alert.AlertType.CONFIRMATION);
+            } else {
+                Alerta.showAlert("Error","La conexión es nula. Asegúrate de inicializarla correctamente.", Alert.AlertType.WARNING);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

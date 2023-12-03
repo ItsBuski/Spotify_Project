@@ -1,5 +1,7 @@
 package com.example.spotify.modelo;
 
+import javafx.scene.control.Alert;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.DriverManager;
@@ -17,6 +19,7 @@ public class Conexion {
             return true;
         } catch (SQLException e) {
             connection = null;
+            e.printStackTrace();
             return false;
         }
     }

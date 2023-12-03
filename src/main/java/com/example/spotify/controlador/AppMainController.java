@@ -40,10 +40,9 @@ public class AppMainController {
             Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
             Stage stage = new Stage();
             stage.setResizable(false);
-
+            stage.setTitle("Spotify");
             // Establecer la modalidad antes de mostrar la ventana
             stage.initModality(Modality.APPLICATION_MODAL);
-
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

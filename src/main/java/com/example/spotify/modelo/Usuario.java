@@ -1,21 +1,21 @@
 package com.example.spotify.modelo;
 
-import javafx.scene.control.Alert;
+import java.io.FileInputStream;
+import java.sql.Blob;
 
-import java.util.List;
-import java.util.Arrays;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-
+/**
+ * Clase que representa a un Usuario en la aplicación Spotify.
+ */
 public class Usuario {
     private String email;
     private String nombre;
     private String passw;
-    private byte[] iconoUsuario;
-    static Conexion conexion = new Conexion();
+    private FileInputStream iconoUsuario;
 
+    /**
+     * Constructor sin argumentos para la clase Usuario.
+     * Inicializa los campos con valores predeterminados.
+     */
     public Usuario() {
         this.email = "";
         this.nombre = "";
@@ -23,12 +23,28 @@ public class Usuario {
         this.iconoUsuario = null;
     }
 
-    public Usuario(String email, String nombre, String passw, byte[] iconoUsuario) {
+    /**
+     * Constructor con argumentos para la clase Usuario.
+     * Permite inicializar todos los campos de un usuario.
+     *
+     * @param email        El correo electrónico del usuario.
+     * @param nombre       El nombre del usuario.
+     * @param passw        La contraseña del usuario.
+     * @param iconoUsuario El icono asociado al usuario en forma de arreglo de bytes.
+     */
+    public Usuario(String email, String nombre, String passw, FileInputStream iconoUsuario) {
         this.email = email;
         this.nombre = nombre;
         this.passw = passw;
         this.iconoUsuario = iconoUsuario;
     }
+
+    public Usuario(String nombre, FileInputStream iconoUsuario) {
+        this.nombre = nombre;
+        this.iconoUsuario = iconoUsuario;
+    }
+
+    // Métodos getter y setter para los campos de la clase Usuario
 
     public String getEmail() {
         return email;
@@ -54,104 +70,25 @@ public class Usuario {
         this.passw = passw;
     }
 
-    public byte[] getIconoUsuario() {
+    public FileInputStream getIconoUsuario() {
         return iconoUsuario;
     }
 
-    public void setIconoUsuario(byte[] iconoUsuario) {
+    public void setIconoUsuario(FileInputStream iconoUsuario) {
         this.iconoUsuario = iconoUsuario;
     }
 
-    // CRUD
-
-    // Insertar Usuario
-    public static void insertarUsuario(Usuario usuario) {
-        String sentenciaSql = "INSERT INTO usuarios (email, nombre, passw, iconoUsuario) VALUES (?, ?, ?, ?)";
-        try {
-            if (conexion.tryConnect()){
-                //Inicia transacción
-                conexion.connection.setAutoCommit(false);
-                PreparedStatement sentencia = Conexion.connection.prepareStatement(sentenciaSql);
-                sentencia.setString(1, usuario.getEmail());
-                sentencia.setString(2, usuario.getNombre());
-                sentencia.setString(3, usuario.getPassw());
-                sentencia.setBytes(4, usuario.getIconoUsuario());
-                sentencia.execute();
-                sentencia.close();
-                // Valida la transacción
-                conexion.connection.commit();
-                Alerta.showAlert("Éxito", "Registro realizado con éxito.", Alert.AlertType.CONFIRMATION);
-            } else {
-                Alerta.showAlert("Error","La conexión es nula. Asegúrate de inicializarla correctamente.", Alert.AlertType.WARNING);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Actualizar Usuario
-    public static void actualizarUsuario(Usuario usuario) {
-        String sentenciaSql = "UPDATE usuarios SET nombre = ?, passw = ?, iconoUsuario = ? WHERE email = ?";
-        PreparedStatement sentencia = null;
-        try {
-            sentencia = Conexion.connection.prepareStatement(sentenciaSql);
-            sentencia.setString(1, usuario.getNombre());
-            sentencia.setString(2, usuario.getPassw());
-            sentencia.setBytes(3, usuario.getIconoUsuario());
-            sentencia.setString(4, usuario.getEmail());
-            sentencia.executeUpdate();
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        } finally {
-            if (sentencia != null) {
-                try {
-                    sentencia.close();
-                } catch (SQLException sqle) {
-                    sqle.printStackTrace();
-                }
-            }
-        }
-    }
-
-    // Mostrar Usuarios
-    public static List<Usuario> obtenerTodosLosUsuarios() {
-        List<Usuario> usuarios = new ArrayList<>();
-        String sql = "SELECT * FROM usuarios";
-        try (PreparedStatement statement = Conexion.connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                String email = resultSet.getString("email");
-                String nombre = resultSet.getString("nombre");
-                String password = resultSet.getString("passw");
-                byte[] iconoUsuario = resultSet.getBytes("iconoUsuario");
-                usuarios.add(new Usuario(email, nombre, password, iconoUsuario));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return usuarios;
-    }
-
-    // Eliminar Usuario
-    public static void eliminarUsuario(String email) {
-        String sentenciaSql = "DELETE FROM usuarios WHERE email = ?";
-        PreparedStatement sentencia = null;
-        try {
-            sentencia = Conexion.connection.prepareStatement(sentenciaSql);
-            sentencia.setString(1, email);
-            sentencia.execute();
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-    }
-
+    /**
+     * Devuelve una representación en cadena del objeto Usuario.
+     *
+     * @return Cadena que representa el objeto Usuario.
+     */
     @Override
     public String toString() {
         return "Usuario{" +
                 "email='" + email + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", passw='" + passw + '\'' +
-                ", iconoUsuario=" + Arrays.toString(iconoUsuario) +
                 '}';
     }
 }

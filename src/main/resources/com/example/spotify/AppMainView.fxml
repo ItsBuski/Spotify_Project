@@ -41,7 +41,7 @@
                               </ImageView>
                               <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" spacing="10.0" style="-fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                                    <ImageView fx:id="iconoUsuarioMain" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                                        <image>
                                           <Image url="@../../../imagenes/alien0.png" />
                                        </image>

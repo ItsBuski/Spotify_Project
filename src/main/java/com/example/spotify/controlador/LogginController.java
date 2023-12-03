@@ -1,75 +1,49 @@
 package com.example.spotify.controlador;
 
+import com.example.spotify.Main;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import com.example.spotify.modelo.Alerta;
-import com.example.spotify.modelo.Conexion;
+import com.example.spotify.modelo.Ventana;
+import com.example.spotify.modelo.CrudUsuarios;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+/**
+ * Controlador para la interfaz de inicio de sesión (LogginView).
+ */
 public class LogginController {
-
+    Main main = new Main();
     @FXML
     private TextField correoTxt;
     @FXML
     private TextField passTxt;
 
-    AppMainController appMainController = new AppMainController();
-    RegisterController registerController = new RegisterController();
-
+    /**
+     * Maneja el evento de inicio de sesión.
+     *
+     * @param actionEvent El evento de acción.
+     */
     @FXML
     public void iniciarSesion(ActionEvent actionEvent) {
        verificarDatosUsuario();
     }
 
+    /**
+     * Verifica los datos del usuario ingresados en la interfaz de inicio de sesión.
+     */
     public void verificarDatosUsuario() {
         String correo = correoTxt.getText();
         String pass = passTxt.getText();
 
-        if (!correo.isEmpty()) {
+        if (!correo.isBlank()) {
             if (correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")){
-                if (!pass.isEmpty()) {
-                    Conexion conexion = new Conexion();
-                    PreparedStatement sentencia = null;
-                    ResultSet resultado = null;
-
-                    try {
-                        if(conexion.tryConnect()){
-                            String sentenciaSql = "SELECT email, passw FROM usuarios where email = ? and passw = ?";
-                            sentencia = conexion.connection.prepareStatement(sentenciaSql);
-                            sentencia.setString(1, correo);
-                            sentencia.setString(2, pass);
-                            resultado = sentencia.executeQuery();
-
-                            if (resultado.next()) {
-                                String email = resultado.getString("email");
-                                String passw = resultado.getString("passw");
-                                Alerta.showAlert("Éxito", "Inicio de sesión exitoso.", Alert.AlertType.CONFIRMATION);
-                                cerrarVentana();
-                                appMainController.ventanaPrincipal();
-                            } else {
-                                Alerta.showAlert("Error", "Correo o contraseña incorrectos.", Alert.AlertType.WARNING);
-                            }
-                        } else {
-                            Alerta.showAlert("Error", "No se pudo conectar a la base de datos. Verifica la configuración.", Alert.AlertType.ERROR);
-                        }
-                    } catch (SQLException e) {
-                        Alerta.showAlert("Error", "No se pudo conectar a la base de datos.", Alert.AlertType.ERROR);
-                        e.printStackTrace();
-                    } finally {
-                        if (sentencia != null && resultado != null) {
-                            try {
-                                sentencia.close();
-                                resultado.close();
-                            } catch (SQLException sqle) {
-                                sqle.printStackTrace();
-                            }
-                        }
+                if (!pass.isBlank()) {
+                    if (CrudUsuarios.loginUsuario(correo, pass, main)) {
+                        cerrarVentana();
+                        Ventana.ventanaMainApp();
+                        main.setUsuario(correo);
                     }
                 } else {
                     Alerta.showAlert("Error", "Por favor, ingrese su contraseña.", Alert.AlertType.WARNING);
@@ -82,11 +56,19 @@ public class LogginController {
         }
     }
 
+    /**
+     * Maneja el evento de registro.
+     *
+     * @param actionEvent El evento de acción.
+     */
     public void registrarse(ActionEvent actionEvent){
         cerrarVentana();
-        registerController.ventanaRegistro();
+        Ventana.ventanaRegister();
     }
 
+    /**
+     * Cierra la ventana actual.
+     */
     private void cerrarVentana() {
         Stage stage = (Stage) correoTxt.getScene().getWindow();
         stage.close();

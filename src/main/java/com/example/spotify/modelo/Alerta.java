@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
  * Clase Java que permite controlar las alertas
  */
 public class Alerta {
-
     /**
      * Muestra por pantalla una alerta del tipo especificado
      *

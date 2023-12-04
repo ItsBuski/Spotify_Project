@@ -16,7 +16,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AppMainController implements Initializable {
-    Main main = new Main();
     @FXML
     private Label nombreUsuariotxt;
     @FXML
@@ -24,9 +23,12 @@ public class AppMainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Usuario usuario = CrudUsuarios.obtenerUsuario(main);
-        nombreUsuariotxt.setText(usuario.getNombre());
-        //iconoUsuarioMain.setImage();
+        Conexion conexion = new Conexion();
+        if (conexion.tryConnect()) {
+            Usuario usuario = CrudUsuarios.obtenerUsuarioParaApp();
+            nombreUsuariotxt.setText(usuario.getNombre());
+            iconoUsuarioMain.setImage(CrudUsuarios.recuperarImagenBytes(usuario.getIconoUsuario()));
+        }
     }
 
     public void busqueda(ActionEvent actionEvent){
@@ -56,5 +58,4 @@ public class AppMainController implements Initializable {
         Stage stage = (Stage) nombreUsuariotxt.getScene().getWindow();
         stage.close();
     }
-
 }

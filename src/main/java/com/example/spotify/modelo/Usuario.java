@@ -1,7 +1,8 @@
 package com.example.spotify.modelo;
 
+import javafx.scene.image.Image;
+
 import java.io.FileInputStream;
-import java.sql.Blob;
 
 /**
  * Clase que representa a un Usuario en la aplicación Spotify.
@@ -10,7 +11,7 @@ public class Usuario {
     private String email;
     private String nombre;
     private String passw;
-    private FileInputStream iconoUsuario;
+    private byte[] iconoUsuario;
 
     /**
      * Constructor sin argumentos para la clase Usuario.
@@ -32,14 +33,14 @@ public class Usuario {
      * @param passw        La contraseña del usuario.
      * @param iconoUsuario El icono asociado al usuario en forma de arreglo de bytes.
      */
-    public Usuario(String email, String nombre, String passw, FileInputStream iconoUsuario) {
+    public Usuario(String email, String nombre, String passw, byte[] iconoUsuario) {
         this.email = email;
         this.nombre = nombre;
         this.passw = passw;
         this.iconoUsuario = iconoUsuario;
     }
 
-    public Usuario(String nombre, FileInputStream iconoUsuario) {
+    public Usuario(String nombre, byte[] iconoUsuario) {
         this.nombre = nombre;
         this.iconoUsuario = iconoUsuario;
     }
@@ -70,11 +71,11 @@ public class Usuario {
         this.passw = passw;
     }
 
-    public FileInputStream getIconoUsuario() {
+    public byte[] getIconoUsuario() {
         return iconoUsuario;
     }
 
-    public void setIconoUsuario(FileInputStream iconoUsuario) {
+    public void setIconoUsuario(byte[] iconoUsuario) {
         this.iconoUsuario = iconoUsuario;
     }
 

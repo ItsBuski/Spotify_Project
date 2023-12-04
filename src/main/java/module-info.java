@@ -4,6 +4,7 @@ module com.example.spotify {
     requires javafx.base;
     requires java.sql;
     requires mysql.connector.j;
+    requires jlayer;
 
     opens com.example.spotify to java.sql, javafx.base, javafx.controls, javafx.fxml, mysql.connector.j;
     opens com.example.spotify.modelo to java.sql, javafx.base, javafx.controls, javafx.fxml, mysql.connector.j;

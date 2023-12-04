@@ -1,40 +1,31 @@
 package com.example.spotify.modelo;
 
-import com.example.spotify.Main;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-
-import java.sql.Blob;
+import java.io.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class CrudUsuarios{
-
     // CRUD
-
-    /**
-     * Inserta un nuevo usuario en la base de datos.
-     *
-     * @param usuario El objeto Usuario a insertar.
-     * @return true si la inserción es exitosa, false si hay un error.
-     */
-
-    public static boolean insertarUsuario(Usuario usuario, Main main) {
+    public static boolean insertarUsuario(Usuario usuario) {
+        Conexion conexion = new Conexion();
         String sentenciaSql = "INSERT INTO usuarios (email, nombre, passw, iconoUsuario) VALUES (?, ?, ?, ?)";
         try {
-            if (main.getConexion().tryConnect()){
+            if (conexion.tryConnect()) {
                 //Inicia transacción
-                main.getConexion().getConnection().setAutoCommit(false);
-                PreparedStatement sentencia = main.getConexion().getConnection().prepareStatement(sentenciaSql);
+                conexion.getConnection().setAutoCommit(false);
+                PreparedStatement sentencia = conexion.getConnection().prepareStatement(sentenciaSql);
                 sentencia.setString(1, usuario.getEmail());
                 sentencia.setString(2, usuario.getNombre());
                 sentencia.setString(3, usuario.getPassw());
-                sentencia.setBlob(4, usuario.getIconoUsuario());
+                sentencia.setBytes(4, usuario.getIconoUsuario());
                 sentencia.execute();
                 sentencia.close();
                 // Valida la transacción
-                main.getConexion().getConnection().commit();
+                conexion.getConnection().commit();
                 Alerta.showAlert("Éxito", "Registro realizado con éxito.", Alert.AlertType.CONFIRMATION);
                 return true;
             } else {
@@ -42,23 +33,24 @@ public class CrudUsuarios{
                 return false;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            Alerta.showAlert("Error","El usuario con el correo que ingresaste ya exista en la base de datos.", Alert.AlertType.WARNING);
+            return false;
         }
     }
-
-    public static boolean loginUsuario(String correo, String pass, Main main) {
+    public static boolean loginUsuario(String correo, String pass) {
+        Conexion conexion = new Conexion();
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
         try {
-            if (main.getConexion().tryConnect()) {
+            if (conexion.tryConnect()) {
                 String sentenciaSql = "SELECT email FROM usuarios where email = ?";
-                sentencia = main.getConexion().getConnection().prepareStatement(sentenciaSql);
+                sentencia = conexion.getConnection().prepareStatement(sentenciaSql);
                 sentencia.setString(1, correo);
                 resultado = sentencia.executeQuery();
 
                 if (resultado.next()) {
                     sentenciaSql = "SELECT email, passw FROM usuarios where email = ? and passw = ?";
-                    sentencia = main.getConexion().getConnection().prepareStatement(sentenciaSql);
+                    sentencia = conexion.getConnection().prepareStatement(sentenciaSql);
                     sentencia.setString(1, correo);
                     sentencia.setString(2, pass);
                     resultado = sentencia.executeQuery();
@@ -93,26 +85,74 @@ public class CrudUsuarios{
         }
         return false;
     }
-
-
-    /**
-     * Actualiza la información de un usuario en la base de datos.
-     *
-     * @param usuario El objeto Usuario con la información actualizada.
-     */
-    /*
-    public void actualizarUsuario(Usuario usuario) {
-        String sentenciaSql = "UPDATE usuarios SET nombre = ?, passw = ?, iconoUsuario = ? WHERE email = ?";
+    public static void eliminarUsuario() {
+        Conexion conexion = new Conexion();
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileReader("usuarioActual.properties"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String sentenciaSql = "DELETE FROM usuarios WHERE email = ?";
         PreparedStatement sentencia = null;
         try {
             sentencia = conexion.getConnection().prepareStatement(sentenciaSql);
-            sentencia.setString(1, usuario.getNombre());
-            sentencia.setString(2, usuario.getPassw());
-            sentencia.setBytes(3, usuario.getIconoUsuario());
-            sentencia.setString(4, usuario.getEmail());
+            sentencia.setString(1, properties.getProperty("usuario"));
+            sentencia.execute();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+    public static Usuario obtenerUsuarioParaApp(){
+        Conexion conexion = new Conexion();
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        try {
+            if (conexion.tryConnect()) {
+                Properties properties = new Properties();
+                properties.load(new FileReader("src/main/resources/usuarioActual.properties"));
+                String sentenciaSql = "SELECT nombre, iconoUsuario FROM usuarios where email = ?";
+                sentencia = conexion.getConnection().prepareStatement(sentenciaSql);
+                sentencia.setString(1, properties.getProperty("usuario"));
+                resultado = sentencia.executeQuery();
+
+                if (resultado.next()) {
+                    String nombre = resultado.getString("nombre");
+                    byte[] iconoUsuario = resultado.getBytes("iconoUsuario");
+                    return new Usuario(nombre, iconoUsuario);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+    public static Image recuperarImagenBytes(byte[] imageData) {
+        ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
+        Image image = new Image(bis);
+        return image;
+    }
+    public static void actualizarUsuarioNombre(String nombre) {
+        Conexion conexion = new Conexion();
+        String sentenciaSql = "UPDATE usuarios SET nombre = ? WHERE email = ?";
+        PreparedStatement sentencia = null;
+        try {
+            Properties properties = new Properties();
+            properties.load(new FileReader("src/main/resources/usuarioActual.properties"));
+            sentencia = conexion.getConnection().prepareStatement(sentenciaSql);
+            sentencia.setString(1, nombre);
+            sentencia.setString(2, properties.getProperty("usuario"));
             sentencia.executeUpdate();
         } catch (SQLException sqle) {
             sqle.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } finally {
             if (sentencia != null) {
                 try {
@@ -123,65 +163,87 @@ public class CrudUsuarios{
             }
         }
     }
-*/
-    // Mostrar Usuarios
-    /**
-     * Obtiene una lista de todos los usuarios almacenados en la base de datos.
-     *
-     * @return Lista de objetos Usuario.
-     */
-    /*
-    public List<Usuario> obtenerTodosLosUsuarios() {
-        List<Usuario> usuarios = new ArrayList<>();
-        String sql = "SELECT * FROM usuarios";
-        try (PreparedStatement statement = conexion.getConnection().prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                String email = resultSet.getString("email");
-                String nombre = resultSet.getString("nombre");
-                String password = resultSet.getString("passw");
-                byte[] iconoUsuario = resultSet.getBytes("iconoUsuario");
-                usuarios.add(new Usuario(email, nombre, password, iconoUsuario));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return usuarios;
-    }
-
-    /*
-    public void eliminarUsuario(String email) {
-        String sentenciaSql = "DELETE FROM usuarios WHERE email = ?";
+    public static void actualizarUsuarioEmail(String email) {
+        Conexion conexion = new Conexion();
+        String sentenciaSql = "UPDATE usuarios SET email = ? WHERE email = ?";
         PreparedStatement sentencia = null;
         try {
+            Properties properties = new Properties();
+            properties.load(new FileReader("src/main/resources/usuarioActual.properties"));
             sentencia = conexion.getConnection().prepareStatement(sentenciaSql);
             sentencia.setString(1, email);
-            sentencia.execute();
+            sentencia.setString(2, properties.getProperty("usuario"));
+            sentencia.executeUpdate();
         } catch (SQLException sqle) {
             sqle.printStackTrace();
-        }
-    }
-    */
-
-    public static Usuario obtenerUsuario(Main main){
-        PreparedStatement sentencia = null;
-        ResultSet resultado = null;
-        try {
-            String sentenciaSql = "SELECT nombre, iconoUsuario FROM usuarios where email = ?";
-            sentencia = main.getConexion().getConnection().prepareStatement(sentenciaSql);
-            sentencia.setString(1, main.getUsuario());
-            resultado = sentencia.executeQuery();
-
-            if(resultado.next()) {
-                String nombre = resultado.getString("nombre");
-                Blob iconoUsuario = resultado.getBlob("iconoUsuario");
-                Usuario usuario = new Usuario(nombre, iconoUsuario);
-                return usuario;
-            }
-        } catch (SQLException e) {
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (sentencia != null) {
+                try {
+                    sentencia.close();
+                } catch (SQLException sqle) {
+                    sqle.printStackTrace();
+                }
+            }
         }
-        return null;
     }
-
+    public static void actualizarUsuarioPassword(String passw) {
+        Conexion conexion = new Conexion();
+        String sentenciaSql = "UPDATE usuarios SET passw = ? WHERE email = ?";
+        PreparedStatement sentencia = null;
+        try {
+            Properties properties = new Properties();
+            properties.load(new FileReader("src/main/resources/usuarioActual.properties"));
+            sentencia = conexion.getConnection().prepareStatement(sentenciaSql);
+            sentencia.setString(1, passw);
+            sentencia.setString(2, properties.getProperty("usuario"));
+            sentencia.executeUpdate();
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (sentencia != null) {
+                try {
+                    sentencia.close();
+                } catch (SQLException sqle) {
+                    sqle.printStackTrace();
+                }
+            }
+        }
+    }
+    public static void actualizarUsuarioIcono(byte[] imgData) {
+        Conexion conexion = new Conexion();
+        String sentenciaSql = "UPDATE usuarios SET iconoUsuario = ? WHERE email = ?";
+        PreparedStatement sentencia = null;
+        try {
+            Properties properties = new Properties();
+            properties.load(new FileReader("src/main/resources/usuarioActual.properties"));
+            if (conexion.tryConnect()) {
+                sentencia = conexion.getConnection().prepareStatement(sentenciaSql);
+                sentencia.setBytes(1, imgData);
+                sentencia.setString(2, properties.getProperty("usuario"));
+                sentencia.executeUpdate();
+            }
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (sentencia != null) {
+                try {
+                    sentencia.close();
+                } catch (SQLException sqle) {
+                    sqle.printStackTrace();
+                }
+            }
+        }
+    }
 }

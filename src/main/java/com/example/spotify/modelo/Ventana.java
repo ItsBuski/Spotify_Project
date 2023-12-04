@@ -43,7 +43,7 @@ public class Ventana {
         }
     }
 
-    public static void ventanaMainApp() {
+    public static void ventanaMainApp(String usuario) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/spotify/AppMainView.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
@@ -56,6 +56,7 @@ public class Ventana {
             stage.show();
         } catch (IOException e) {
             Alerta.showAlert("Error","Error al cargar la ventana principal.", Alert.AlertType.WARNING);
+            e.printStackTrace();
         }
     }
 

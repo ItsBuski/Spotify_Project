@@ -14,7 +14,6 @@ import com.example.spotify.modelo.CrudUsuarios;
  * Controlador para la interfaz de inicio de sesión (LogginView).
  */
 public class LogginController {
-    Main main = new Main();
     @FXML
     private TextField correoTxt;
     @FXML
@@ -40,10 +39,10 @@ public class LogginController {
         if (!correo.isBlank()) {
             if (correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")){
                 if (!pass.isBlank()) {
-                    if (CrudUsuarios.loginUsuario(correo, pass, main)) {
+                    if (CrudUsuarios.loginUsuario(correo, pass)) {
                         cerrarVentana();
-                        Ventana.ventanaMainApp();
-                        main.setUsuario(correo);
+                        Main.usuarioActual(correo);
+                        Ventana.ventanaMainApp(correo);
                     }
                 } else {
                     Alerta.showAlert("Error", "Por favor, ingrese su contraseña.", Alert.AlertType.WARNING);

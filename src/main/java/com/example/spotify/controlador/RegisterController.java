@@ -7,10 +7,8 @@ import com.example.spotify.Main;
 import com.example.spotify.modelo.*;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
-import java.nio.ByteBuffer;
 import javafx.scene.image.*;
 
-import java.sql.Blob;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -19,7 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 
 public class RegisterController implements Initializable {
-    Main main = new Main();
     @FXML
     private TextField nombreUsuarioNuevoTxt;
     @FXML
@@ -43,10 +40,10 @@ public class RegisterController implements Initializable {
         };
 
         rutaIconos = new String[] {
-                new String("/imagenes/iconoUsuario1.png"),
-                new String("/imagenes/iconoUsuario2.png"),
-                new String("/imagenes/iconoUsuario3.png"),
-                new String("/imagenes/iconoUsuario4.png")
+                new String("src/main/resources/imagenes/iconoUsuario1.png"),
+                new String("src/main/resources/imagenes/iconoUsuario2.png"),
+                new String("src/main/resources/imagenes/iconoUsuario3.png"),
+                new String("src/main/resources/imagenes/iconoUsuario4.png")
         };
 
         // Mostrar la primera imagen al inicio
@@ -55,18 +52,17 @@ public class RegisterController implements Initializable {
 
     @FXML
     public void confirmarRegistro(ActionEvent actionEvent) {
-        Image imagenElegida = iconoImageView.getImage();
         Usuario usuario = new Usuario();
         if (camposNoVacios() && passCoinciden()) {
             // Configurar datos del usuario
             usuario.setNombre(nombreUsuarioNuevoTxt.getText().trim());
             usuario.setEmail(emailUsuarioNuevoTxt.getText().trim());
             usuario.setPassw(passUsuarioNuevoTxt.getText().trim());
-            //usuario.setIconoUsuario((Blob));
-            if(CrudUsuarios.insertarUsuario(usuario, main)) {
+            usuario.setIconoUsuario(obtenerIcono());
+            if(CrudUsuarios.insertarUsuario(usuario)) {
                 cerrarVentana();
-                Ventana.ventanaMainApp();
-                main.setUsuario(usuario.getEmail());
+                Main.usuarioActual(usuario.getEmail());
+                Ventana.ventanaMainApp(usuario.getEmail());
             }
         }
     }
@@ -128,20 +124,35 @@ public class RegisterController implements Initializable {
         Stage stage = (Stage) nombreUsuarioNuevoTxt.getScene().getWindow();
         stage.close();
     }
-/*
-    public void obtenerIcono() {
-        for (int i = 0; i < rutaIconos.length; i++) {
 
+    public byte[] obtenerIcono() {
+        String file = "";
+        for (int i = 0; i < iconos.length; i++) {
+            if (iconos[i] == iconoImageView.getImage()) {
+                file = rutaIconos[i];
+            }
         }
-        File imagen = new File(ruta);
+        FileInputStream fis = null;
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(imagen));
+            fis = new FileInputStream(file);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+
+        try {
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        byte[] imageData = bos.toByteArray();
+        return imageData;
     }
-*/
+
 
 }

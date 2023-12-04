@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.spotify.controlador.AdminController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="700.0" pickOnBounds="true" smooth="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../../imagenes/background3.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" layoutX="100.0" layoutY="53.0" prefHeight="300.0" prefWidth="500.0" spacing="40.0">
+         <children>
+            <VBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <Label text="Añadir canción" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="100.0" spacing="50.0">
+               <children>
+                  <Label prefWidth="200.0" text="Seleccionar cancion:" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#elegirCancion" prefWidth="175.0" text="Elegir mp3">
+                     <font>
+                        <Font name="Verdana" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" spacing="50.0">
+               <children>
+                  <Label prefWidth="200.0" text="Nombre de la canción:" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nombreCancionTxt" prefWidth="175.0" promptText="Nombre de la canción">
+                     <font>
+                        <Font name="Verdana" size="12.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" spacing="50.0">
+               <children>
+                  <Label prefWidth="200.0" text="Duración:" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="duracionCancionTxt" prefWidth="175.0" promptText="Duración de la canción">
+                     <font>
+                        <Font name="Verdana" size="12.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" spacing="50.0">
+               <children>
+                  <Label prefWidth="200.0" text="Nombre artista/s:" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nombreArtistaTxt" prefWidth="175.0" promptText="Nombre del artista/s">
+                     <font>
+                        <Font name="Verdana" size="12.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" spacing="50.0">
+               <children>
+                  <Label prefWidth="200.0" text="Nombre del álbum:" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nombreAlbumCancionTxt" prefWidth="175.0" promptText="Nombre del álbum">
+                     <font>
+                        <Font name="Verdana" size="12.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" spacing="50.0">
+               <children>
+                  <Label prefWidth="200.0" text="Imágen álbum:" textFill="WHITE">
+                     <font>
+                        <Font name="Verdana Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#elegirImagen" prefWidth="175.0" text="Elegir imágen">
+                     <font>
+                        <Font name="Verdana" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" spacing="100.0">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#cancelar" stylesheets="@../../../../estilos/boton.css" text="Cancelar">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#confirmarCancion" stylesheets="@../../../../estilos/boton.css" text="Confirmar">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
